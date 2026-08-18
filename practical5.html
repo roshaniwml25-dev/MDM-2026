@@ -1,0 +1,736 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Urban Bites | Restaurant</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-stone-950 text-white">
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="bg-stone-950/95 backdrop-blur-md fixed w-full z-50 border-b border-stone-800">
+
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        <!-- Logo -->
+        <a href="#" class="text-2xl font-extrabold">
+            <span class="text-orange-500">Urban</span> Bites
+        </a>
+
+        <!-- Navigation -->
+        <div class="hidden md:flex items-center gap-8 text-sm">
+
+            <a href="#home" class="hover:text-orange-400 transition">
+                Home
+            </a>
+
+            <a href="#menu" class="hover:text-orange-400 transition">
+                Menu
+            </a>
+
+            <a href="#about" class="hover:text-orange-400 transition">
+                About
+            </a>
+
+            <a href="#contact" class="hover:text-orange-400 transition">
+                Contact
+            </a>
+
+        </div>
+
+        <a href="#menu"
+           class="bg-orange-500 hover:bg-orange-600 px-5 py-2 rounded-full
+                  font-semibold transition">
+            Order Now
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO SECTION ================= -->
+
+<section id="home"
+         class="min-h-screen flex items-center pt-20
+                bg-gradient-to-br from-stone-950 via-stone-900 to-orange-950">
+
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+
+        <!-- Hero Text -->
+
+        <div>
+
+            <p class="text-orange-400 uppercase tracking-[5px] text-sm font-semibold mb-5">
+                Fresh • Delicious • Authentic
+            </p>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+                Good Food.
+                <span class="text-orange-500">
+                    Good Mood.
+                </span>
+            </h1>
+
+            <p class="text-stone-400 text-lg mt-6 max-w-xl">
+                Discover delicious dishes prepared with fresh ingredients
+                and served with a touch of love.
+            </p>
+
+            <div class="flex flex-wrap gap-4 mt-8">
+
+                <a href="#menu"
+                   class="bg-orange-500 hover:bg-orange-600
+                          px-7 py-3 rounded-full font-semibold transition">
+                    Explore Menu
+                </a>
+
+                <a href="#about"
+                   class="border border-stone-600 hover:border-orange-500
+                          px-7 py-3 rounded-full font-semibold transition">
+                    Our Story
+                </a>
+
+            </div>
+
+            <!-- Rating -->
+
+            <div class="flex items-center gap-4 mt-10">
+
+                <div class="text-yellow-400 text-xl">
+                    ★★★★★
+                </div>
+
+                <p class="text-stone-400">
+                    4.9/5 from 2,000+ food lovers
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Hero Image -->
+
+        <div class="relative">
+
+            <div class="absolute -inset-4 bg-orange-500/20
+                        rounded-full blur-3xl">
+            </div>
+
+            <img
+                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
+                alt="Restaurant interior"
+                class="relative w-full h-[500px] object-cover
+                       rounded-[40px] shadow-2xl">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="bg-orange-500 py-8">
+
+    <div class="max-w-7xl mx-auto px-6
+                grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+
+        <div>
+            <div class="text-3xl">🥗</div>
+            <h3 class="font-bold mt-2">Fresh Ingredients</h3>
+            <p class="text-orange-100 text-sm">
+                Quality ingredients every day
+            </p>
+        </div>
+
+        <div>
+            <div class="text-3xl">👨‍🍳</div>
+            <h3 class="font-bold mt-2">Expert Chefs</h3>
+            <p class="text-orange-100 text-sm">
+                Prepared by passionate chefs
+            </p>
+        </div>
+
+        <div>
+            <div class="text-3xl">🚴</div>
+            <h3 class="font-bold mt-2">Fast Delivery</h3>
+            <p class="text-orange-100 text-sm">
+                Hot food delivered to your door
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MENU SECTION ================= -->
+
+<section id="menu" class="py-20 bg-stone-900">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Heading -->
+
+        <div class="text-center mb-12">
+
+            <p class="text-orange-500 uppercase tracking-[4px] text-sm">
+                Our Menu
+            </p>
+
+            <h2 class="text-4xl md:text-5xl font-bold mt-3">
+                Popular Dishes
+            </h2>
+
+            <p class="text-stone-400 mt-4 max-w-2xl mx-auto">
+                A handpicked selection of our most loved dishes.
+                Every plate is prepared fresh when you order.
+            </p>
+
+        </div>
+
+
+        <!-- Category Buttons -->
+
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
+
+            <button class="bg-orange-500 px-5 py-2 rounded-full
+                           text-sm font-semibold">
+                All
+            </button>
+
+            <button class="bg-stone-800 hover:bg-orange-500
+                           px-5 py-2 rounded-full text-sm transition">
+                Starters
+            </button>
+
+            <button class="bg-stone-800 hover:bg-orange-500
+                           px-5 py-2 rounded-full text-sm transition">
+                Main Course
+            </button>
+
+            <button class="bg-stone-800 hover:bg-orange-500
+                           px-5 py-2 rounded-full text-sm transition">
+                Pizza
+            </button>
+
+            <button class="bg-stone-800 hover:bg-orange-500
+                           px-5 py-2 rounded-full text-sm transition">
+                Desserts
+            </button>
+
+        </div>
+
+
+        <!-- FOOD GRID -->
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+
+            <!-- CARD 1 -->
+
+            <article class="bg-stone-950 rounded-3xl overflow-hidden
+                            border border-stone-800
+                            hover:border-orange-500
+                            hover:-translate-y-2
+                            transition duration-300">
+
+                <div class="relative overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38"
+                        alt="Margherita Pizza"
+                        class="w-full h-64 object-cover
+                               hover:scale-110 transition duration-500">
+
+                    <span class="absolute top-4 left-4
+                                 bg-orange-500 px-3 py-1
+                                 rounded-full text-xs font-bold">
+                        BEST SELLER
+                    </span>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex justify-between items-center">
+
+                        <h3 class="text-xl font-bold">
+                            Margherita Pizza
+                        </h3>
+
+                        <span class="text-orange-400 font-bold">
+                            ₹299
+                        </span>
+
+                    </div>
+
+                    <p class="text-stone-400 text-sm mt-3">
+                        Classic Italian pizza with mozzarella,
+                        fresh basil and tomato sauce.
+                    </p>
+
+                    <button
+                        class="w-full mt-5 bg-orange-500
+                               hover:bg-orange-600
+                               py-3 rounded-xl font-semibold transition">
+                        Add to Order
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+
+            <article class="bg-stone-950 rounded-3xl overflow-hidden
+                            border border-stone-800
+                            hover:border-orange-500
+                            hover:-translate-y-2
+                            transition duration-300">
+
+                <div class="relative overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+                        alt="Classic Burger"
+                        class="w-full h-64 object-cover
+                               hover:scale-110 transition duration-500">
+
+                    <span class="absolute top-4 left-4
+                                 bg-red-500 px-3 py-1
+                                 rounded-full text-xs font-bold">
+                        POPULAR
+                    </span>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex justify-between items-center">
+
+                        <h3 class="text-xl font-bold">
+                            Classic Burger
+                        </h3>
+
+                        <span class="text-orange-400 font-bold">
+                            ₹249
+                        </span>
+
+                    </div>
+
+                    <p class="text-stone-400 text-sm mt-3">
+                        Juicy grilled patty with lettuce,
+                        tomato, cheese and special sauce.
+                    </p>
+
+                    <button
+                        class="w-full mt-5 bg-orange-500
+                               hover:bg-orange-600
+                               py-3 rounded-xl font-semibold transition">
+                        Add to Order
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+
+            <article class="bg-stone-950 rounded-3xl overflow-hidden
+                            border border-stone-800
+                            hover:border-orange-500
+                            hover:-translate-y-2
+                            transition duration-300">
+
+                <div class="relative overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601"
+                        alt="Creamy Pasta"
+                        class="w-full h-64 object-cover
+                               hover:scale-110 transition duration-500">
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex justify-between items-center">
+
+                        <h3 class="text-xl font-bold">
+                            Creamy Pasta
+                        </h3>
+
+                        <span class="text-orange-400 font-bold">
+                            ₹279
+                        </span>
+
+                    </div>
+
+                    <p class="text-stone-400 text-sm mt-3">
+                        Creamy Italian pasta with herbs,
+                        parmesan and fresh vegetables.
+                    </p>
+
+                    <button
+                        class="w-full mt-5 bg-orange-500
+                               hover:bg-orange-600
+                               py-3 rounded-xl font-semibold transition">
+                        Add to Order
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 4 -->
+
+            <article class="bg-stone-950 rounded-3xl overflow-hidden
+                            border border-stone-800
+                            hover:border-orange-500
+                            hover:-translate-y-2
+                            transition duration-300">
+
+                <div class="relative overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1544025162-d76694265947"
+                        alt="Grilled Chicken"
+                        class="w-full h-64 object-cover
+                               hover:scale-110 transition duration-500">
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex justify-between items-center">
+
+                        <h3 class="text-xl font-bold">
+                            Grilled Chicken
+                        </h3>
+
+                        <span class="text-orange-400 font-bold">
+                            ₹349
+                        </span>
+
+                    </div>
+
+                    <p class="text-stone-400 text-sm mt-3">
+                        Tender grilled chicken served with
+                        roasted vegetables and sauce.
+                    </p>
+
+                    <button
+                        class="w-full mt-5 bg-orange-500
+                               hover:bg-orange-600
+                               py-3 rounded-xl font-semibold transition">
+                        Add to Order
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 5 -->
+
+            <article class="bg-stone-950 rounded-3xl overflow-hidden
+                            border border-stone-800
+                            hover:border-orange-500
+                            hover:-translate-y-2
+                            transition duration-300">
+
+                <div class="relative overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1551183053-bf91a1d81141"
+                        alt="Vegetable Pasta"
+                        class="w-full h-64 object-cover
+                               hover:scale-110 transition duration-500">
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex justify-between items-center">
+
+                        <h3 class="text-xl font-bold">
+                            Veggie Pasta
+                        </h3>
+
+                        <span class="text-orange-400 font-bold">
+                            ₹229
+                        </span>
+
+                    </div>
+
+                    <p class="text-stone-400 text-sm mt-3">
+                        Fresh vegetables tossed with pasta,
+                        herbs and creamy Italian sauce.
+                    </p>
+
+                    <button
+                        class="w-full mt-5 bg-orange-500
+                               hover:bg-orange-600
+                               py-3 rounded-xl font-semibold transition">
+                        Add to Order
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 6 -->
+
+            <article class="bg-stone-950 rounded-3xl overflow-hidden
+                            border border-stone-800
+                            hover:border-orange-500
+                            hover:-translate-y-2
+                            transition duration-300">
+
+                <div class="relative overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1551024506-0bccd828d307"
+                        alt="Chocolate Dessert"
+                        class="w-full h-64 object-cover
+                               hover:scale-110 transition duration-500">
+
+                    <span class="absolute top-4 left-4
+                                 bg-pink-500 px-3 py-1
+                                 rounded-full text-xs font-bold">
+                        SWEET PICK
+                    </span>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex justify-between items-center">
+
+                        <h3 class="text-xl font-bold">
+                            Chocolate Delight
+                        </h3>
+
+                        <span class="text-orange-400 font-bold">
+                            ₹179
+                        </span>
+
+                    </div>
+
+                    <p class="text-stone-400 text-sm mt-3">
+                        Rich chocolate dessert topped with
+                        creamy chocolate sauce.
+                    </p>
+
+                    <button
+                        class="w-full mt-5 bg-orange-500
+                               hover:bg-orange-600
+                               py-3 rounded-xl font-semibold transition">
+                        Add to Order
+                    </button>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about" class="py-20 bg-stone-950">
+
+    <div class="max-w-6xl mx-auto px-6
+                grid md:grid-cols-2 gap-12 items-center">
+
+        <img
+            src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f"
+            alt="Food preparation"
+            class="rounded-3xl w-full h-[420px] object-cover">
+
+        <div>
+
+            <p class="text-orange-500 uppercase tracking-[4px] text-sm">
+                About Us
+            </p>
+
+            <h2 class="text-4xl font-bold mt-3">
+                Made With Passion,
+                Served With Love
+            </h2>
+
+            <p class="text-stone-400 mt-6 leading-7">
+                Urban Bites is a modern restaurant focused on bringing
+                delicious food and memorable experiences to every customer.
+                Our chefs combine fresh ingredients with creative recipes
+                to create food that everyone can enjoy.
+            </p>
+
+            <div class="grid grid-cols-2 gap-5 mt-8">
+
+                <div class="bg-stone-900 p-5 rounded-2xl">
+                    <h3 class="text-2xl font-bold text-orange-400">
+                        10+
+                    </h3>
+                    <p class="text-stone-400 text-sm">
+                        Years Experience
+                    </p>
+                </div>
+
+                <div class="bg-stone-900 p-5 rounded-2xl">
+                    <h3 class="text-2xl font-bold text-orange-400">
+                        50+
+                    </h3>
+                    <p class="text-stone-400 text-sm">
+                        Delicious Dishes
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="py-16 bg-orange-500">
+
+    <div class="text-center max-w-3xl mx-auto px-6">
+
+        <h2 class="text-4xl font-bold">
+            Hungry Yet?
+        </h2>
+
+        <p class="text-orange-100 mt-3">
+            Your favorite meal is just one click away.
+        </p>
+
+        <a href="#menu"
+           class="inline-block mt-7 bg-stone-950
+                  hover:bg-stone-800
+                  px-8 py-3 rounded-full
+                  font-semibold transition">
+            Browse Menu
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="contact" class="bg-black py-12">
+
+    <div class="max-w-7xl mx-auto px-6
+                grid grid-cols-1 md:grid-cols-3 gap-10">
+
+        <!-- Restaurant -->
+
+        <div>
+
+            <h2 class="text-2xl font-bold">
+                <span class="text-orange-500">Urban</span> Bites
+            </h2>
+
+            <p class="text-stone-500 mt-4">
+                Delicious food, memorable moments.
+            </p>
+
+        </div>
+
+
+        <!-- Contact -->
+
+        <div>
+
+            <h3 class="font-bold text-lg mb-4">
+                Contact Us
+            </h3>
+
+            <p class="text-stone-500">
+                📍 Main Street, Nagpur
+            </p>
+
+            <p class="text-stone-500 mt-2">
+                📞 +91 98765 43210
+            </p>
+
+            <p class="text-stone-500 mt-2">
+                ✉️ hello@urbanbites.com
+            </p>
+
+        </div>
+
+
+        <!-- Opening Hours -->
+
+        <div>
+
+            <h3 class="font-bold text-lg mb-4">
+                Opening Hours
+            </h3>
+
+            <p class="text-stone-500">
+                Monday - Friday: 11 AM - 11 PM
+            </p>
+
+            <p class="text-stone-500 mt-2">
+                Saturday - Sunday: 10 AM - 12 AM
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="border-t border-stone-900 mt-10 pt-6
+                text-center text-stone-600 text-sm">
+
+        © 2026 Urban Bites. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+</body>
+</html>
+```
