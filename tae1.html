@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Digital College Course Registration</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f6fa;
+            color: #222;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #243b55, #141e30);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 15px;
+        }
+
+        /* Navigation */
+        nav {
+            background: #172a3a;
+            text-align: center;
+            padding: 14px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffd166;
+        }
+
+        /* Main */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            color: #243b55;
+            margin-bottom: 18px;
+        }
+
+        /* Student Form */
+        .student-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .student-form input,
+        .student-form select {
+            padding: 12px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            width: 100%;
+        }
+
+        .student-form input:focus,
+        .student-form select:focus {
+            outline: 2px solid #243b55;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 13px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #243b55;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f7f9fb;
+        }
+
+        tr:hover {
+            background: #eef4f8;
+        }
+
+        /* Buttons */
+        button {
+            border: none;
+            padding: 9px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #243b55;
+            color: white;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #16283b;
+        }
+
+        .remove-btn {
+            background: #d9534f;
+        }
+
+        .remove-btn:hover {
+            background: #b52b27;
+        }
+
+        /* Message */
+        #message {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .success {
+            background: #dff5e1;
+            color: #20752a;
+            display: block !important;
+        }
+
+        .error {
+            background: #ffe0e0;
+            color: #a30000;
+            display: block !important;
+        }
+
+        /* Summary */
+        .summary-box {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .summary-item {
+            background: #eef4fa;
+            padding: 20px;
+            border-radius: 8px;8  
+        }
+
+        .summary-item h3 {
+            color: #243b55;
+            margin-bottom: 8px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-top: 15px;
+        }
+
+        .progress {
+            width: 100%;
+            height: 18px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #progressBar {
+            height: 100%;
+            width: 0%;
+            background: #243b55;
+            transition: 0.3s;
+        }
+
+        /* Registered Courses */
+        #registeredCourses {
+            margin-top: 20px;
+        }
+
+        .registered-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f5f7fa;
+            border-left: 4px solid #243b55;
+            border-radius: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: #172a3a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 700px) {
+
+            .student-form,
+            .summary-box {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                display: block;
+                margin: 10px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .registered-item {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Digital College Course Registration</h1>
+        <p>Academic Planning and Smart Course Registration System</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#student">Student</a>
+        <a href="#courses">Courses</a>
+        <a href="#summary">My Registration</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- Student Information -->
+        <div class="card" id="student">
+
+            <h2>Student Information</h2>
+
+            <div class="student-form">
+
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Student Name"
+                >
+
+                <input
+                    type="text"
+                    id="rollNo"
+                    placeholder="Roll Number"
+                >
+
+                <input
+                    type="text"
+                    id="branch"
+                    placeholder="Branch"
+                >
+
+                <select id="semester">
+                    <option value="">Select Semester</option>
+                    <option>Semester 1</option>
+                    <option>Semester 2</option>
+                    <option>Semester 3</option>
+                    <option>Semester 4</option>
+                    <option>Semester 5</option>
+                    <option>Semester 6</option>
+                    <option>Semester 7</option>
+                    <option>Semester 8</option>
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- Available Courses -->
+        <div class="card" id="courses">
+
+            <h2>Available Courses</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <tr>
+                        <th>Code</th>
+                        <th>Course Name</th>
+                        <th>Credits</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Action</th>
+                    </tr>
+
+                    <tr>
+                        <td>CM101</td>
+                        <td>Programming in C++</td>
+                        <td>4</td>
+                        <td>Monday</td>
+                        <td>09:00-10:00</td>
+                        <td>
+                            <button onclick="registerCourse(
+                                'CM101',
+                                'Programming in C++',
+                                4,
+                                'Monday',
+                                '09:00-10:00'
+                            )">
+                                Register
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>CM102</td>
+                        <td>Data Structures</td>
+                        <td>4</td>
+                        <td>Tuesday</td>
+                        <td>10:00-11:00</td>
+                        <td>
+                            <button onclick="registerCourse(
+                                'CM102',
+                                'Data Structures',
+                                4,
+                                'Tuesday',
+                                '10:00-11:00'
+                            )">
+                                Register
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>CM103</td>
+                        <td>Database Management</td>
+                        <td>3</td>
+                        <td>Wednesday</td>
+                        <td>09:00-10:00</td>
+                        <td>
+                            <button onclick="registerCourse(
+                                'CM103',
+                                'Database Management',
+                                3,
+                                'Wednesday',
+                                '09:00-10:00'
+                            )">
+                                Register
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>CM104</td>
+                        <td>Computer Networks</td>
+                        <td>3</td>
+                        <td>Monday</td>
+                        <td>11:00-12:00</td>
+                        <td>
+                            <button onclick="registerCourse(
+                                'CM104',
+                                'Computer Networks',
+                                3,
+                                'Monday',
+                                '11:00-12:00'
+                            )">
+                                Register
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>CM105</td>
+                        <td>Web Designing</td>
+                        <td>3</td>
+                        <td>Thursday</td>
+                        <td>11:00-12:00</td>
+                        <td>
+                            <button onclick="registerCourse(
+                                'CM105',
+                                'Web Designing',
+                                3,
+                                'Thursday',
+                                '11:00-12:00'
+                            )">
+                                Register
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>CM106</td>
+                        <td>Artificial Intelligence</td>
+                        <td>4</td>
+                        <td>Friday</td>
+                        <td>10:00-11:00</td>
+                        <td>
+                            <button onclick="registerCourse(
+                                'CM106',
+                                'Artificial Intelligence',
+                                4,
+                                'Friday',
+                                '10:00-11:00'
+                            )">
+                                Register
+                            </button>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div id="message"></div>
+
+        </div>
+
+
+        <!-- Registration Summary -->
+        <div class="card" id="summary">
+
+            <h2>Academic Planning Summary</h2>
+
+            <div class="summary-box">
+
+                <div class="summary-item">
+                    <h3>Total Credits</h3>
+                    <p>
+                        <strong id="totalCredits">0</strong> / 18 Credits
+                    </p>
+                </div>
+
+                <div class="summary-item">
+                    <h3>Registered Courses</h3>
+                    <p>
+                        <strong id="courseCount">0</strong> Courses
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Credit Progress -->
+            <div class="progress-container">
+
+                <p><strong>Credit Progress</strong></p>
+
+                <br>
+
+                <div class="progress">
+                    <div id="progressBar"></div>
+                </div>
+
+            </div>
+
+            <!-- Registered Course List -->
+            <div id="registeredCourses">
+
+                <p>No courses registered yet.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>Digital College Course Registration System</p>
+        <p>Academic Planning Tool</p>
+    </footer>
+
+
+    <script>
+
+        let registeredCourses = [];
+
+        let totalCredits = 0;
+
+        const MAX_CREDITS = 18;
+
+
+        // Register Course
+        function registerCourse(code, name, credits, day, time) {
+
+            let message = document.getElementById("message");
+
+            message.className = "";
+
+
+            // Validate student details
+            let studentName =
+                document.getElementById("studentName").value.trim();
+
+            let rollNo =
+                document.getElementById("rollNo").value.trim();
+
+            if (studentName === "" || rollNo === "") {
+
+                showMessage(
+                    "Please enter Student Name and Roll Number first.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            // Check duplicate course
+            for (let course of registeredCourses) {
+
+                if (course.code === code) {
+
+                    showMessage(
+                        "This course is already registered.",
+                        "error"
+                    );
+
+                    return;
+                }
+            }
+
+
+            // Check credit limit
+            if (totalCredits + credits > MAX_CREDITS) {
+
+                showMessage(
+                    "Credit limit exceeded! Maximum allowed credits are 18.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            // Check time conflict
+            for (let course of registeredCourses) {
+
+                if (course.day === day && course.time === time) {
+
+                    showMessage(
+                        "Time conflict! " +
+                        name +
+                        " has the same time as " +
+                        course.name +
+                        ".",
+                        "error"
+                    );
+
+                    return;
+                }
+            }
+
+
+            // Add course
+            registeredCourses.push({
+                code: code,
+                name: name,
+                credits: credits,
+                day: day,
+                time: time
+            });
+
+
+            totalCredits += credits;
+
+
+            showMessage(
+                name + " registered successfully!",
+                "success"
+            );
+
+
+            updateSummary();
+        }
+
+
+        // Display Message
+        function showMessage(text, type) {
+
+            let message = document.getElementById("message");
+
+            message.innerHTML = text;
+
+            message.className = type;
+        }
+
+
+        // Update Summary
+        function updateSummary() {
+
+            document.getElementById("totalCredits").innerHTML =
+                totalCredits;
+
+            document.getElementById("courseCount").innerHTML =
+                registeredCourses.length;
+
+
+            // Update progress bar
+            let percentage =
+                (totalCredits / MAX_CREDITS) * 100;
+
+            document.getElementById("progressBar").style.width =
+                percentage + "%";
+
+
+            let list =
+                document.getElementById("registeredCourses");
+
+            list.innerHTML = "";
+
+
+            if (registeredCourses.length === 0) {
+
+                list.innerHTML =
+                    "<p>No courses registered yet.</p>";
+
+                return;
+            }
+
+
+            for (let course of registeredCourses) {
+
+                list.innerHTML +=
+
+                    `<div class="registered-item">
+
+                        <div>
+                            <strong>${course.code}</strong>
+                            - ${course.name}
+                            <br>
+                            ${course.credits} Credits |
+                            ${course.day} |
+                            ${course.time}
+                        </div>
+
+                        <button
+                            class="remove-btn"
+                            onclick="removeCourse('${course.code}')">
+                            Remove
+                        </button>
+
+                    </div>`;
+            }
+        }
+
+
+        // Remove Course
+        function removeCourse(code) {
+
+            let index =
+                registeredCourses.findIndex(
+                    course => course.code === code
+                );
+
+
+            if (index !== -1) {
+
+                totalCredits -=
+                    registeredCourses[index].credits;
+
+                registeredCourses.splice(index, 1);
+
+                showMessage(
+                    "Course removed successfully.",
+                    "success"
+                );
+
+                updateSummary();
+            }
+        }
+
+    </script>
+
+</body>
+</html>
