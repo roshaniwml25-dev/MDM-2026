@@ -1,0 +1,168 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College FAQ Portal</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #dbeafe;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1d3557;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: #1d3557;
+            transition: 0.3s;
+        }
+
+        .question:hover {
+            background: #DBEAFE;
+        }
+
+        .icon {
+            font-size: 24px;
+            color: #0ba8f1;
+            transition: transform 0.3s;
+        }
+
+        .answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            color: #555;
+            line-height: 1.6;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .answer {
+            max-height: 150px;
+            padding: 15px 20px 20px;
+        }
+
+        .faq-item.active .icon {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="faq-container">
+
+        <h1>🎓 College Help Portal</h1>
+        <p class="subtitle">Frequently Asked Questions</p>
+
+        <div class="faq-item">
+            <div class="question">
+                How do I register for a course?
+                <span class="icon">+</span>
+            </div>
+
+            <div class="answer">
+                Login to the student portal, select Course Registration,
+                choose your subjects, and submit the registration form.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">
+                How can I check my timetable?
+                <span class="icon">+</span>
+            </div>
+
+            <div class="answer">
+                You can view your class timetable by logging into the
+                student portal and selecting the Timetable section.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">
+                How do I contact the department?
+                <span class="icon">+</span>
+            </div>
+
+            <div class="answer">
+                You can visit the department office or contact the
+                department through the official college email.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">
+                What if I forget my password?
+                <span class="icon">+</span>
+            </div>
+
+            <div class="answer">
+                Click on the "Forgot Password" option on the login page
+                and follow the instructions to reset your password.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        // Select all FAQ items
+        let faqItems = document.querySelectorAll(".faq-item");
+
+        // Add click event to every question
+        faqItems.forEach(function(item) {
+
+            let question = item.querySelector(".question");
+
+            question.addEventListener("click", function() {
+
+                // Close other answers
+                faqItems.forEach(function(otherItem) {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove("active");
+                    }
+                });
+
+                // Open or close clicked answer
+                item.classList.toggle("active");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
+```
