@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Registration</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.box{
+    background:white;
+    padding:25px;
+    width:400px;
+    border-radius:12px;
+    box-shadow:0 5px 20px #444;
+}
+h2{text-align:center}
+input,select,button{
+    width:100%;
+    padding:10px;
+    margin:7px 0 12px;
+    box-sizing:border-box;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+button{
+    background:#667eea;
+    color:white;
+    border:0;
+    cursor:pointer;
+}
+button:hover{background:#764ba2}
+.error{color:red;font-size:13px}
+#msg{text-align:center;font-weight:bold}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>Student Registration</h2>
+
+<form id="form">
+
+<label>Name *</label>
+<input id="name" placeholder="Enter your name">
+<p class="error" id="e1"></p>
+
+<label>Email *</label>
+<input id="email" placeholder="Enter your email">
+<p class="error" id="e2"></p>
+
+<label>Password *</label>
+<input type="password" id="pass" placeholder="Minimum 6 characters">
+
+<label>Mobile *</label>
+<input id="mobile" placeholder="10-digit mobile number">
+<p class="error" id="e3"></p>
+
+<label>Course *</label>
+<select id="course">
+    <option value="">Select Course</option>
+    <option>CSE</option>
+    <option>AIML</option>
+    <option>IT</option>
+    <option>ETC</option>
+</select>
+
+<button type="submit">Register Now</button>
+<p id="msg"></p>
+
+</form>
+</div>
+
+<script>
+document.getElementById("form").onsubmit=function(e){
+    e.preventDefault();
+
+    let name=document.getElementById("name").value.trim();
+    let email=document.getElementById("email").value.trim();
+    let pass=document.getElementById("pass").value;
+    let mobile=document.getElementById("mobile").value.trim();
+    let course=document.getElementById("course").value;
+    let valid=true;
+
+    document.querySelectorAll(".error").forEach(x=>x.innerHTML="");
+    document.getElementById("msg").innerHTML="";
+
+    if(!name){
+        e1.innerHTML="Name is required";
+        valid=false;
+    }
+
+    if(!/^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(email)){
+        e2.innerHTML="Enter a valid email";
+        valid=false;
+    }
+
+    if(pass.length<6){
+        document.getElementById("pass").style.border="1px solid red";
+        valid=false;
+    }
+
+    if(!/^[0-9]{10}$/.test(mobile)){
+        e3.innerHTML="Enter 10 digit mobile number";
+        valid=false;
+    }
+
+    if(!course){
+        valid=false;
+    }
+
+    if(valid){
+        msg.innerHTML="✓ Registration Successful!";
+        msg.style.color="green";
+        this.reset();
+    }else{
+        msg.innerHTML="Please correct the errors";
+        msg.style.color="red";
+    }
+};
+</script>
+
+</body>
+</html>
+```
