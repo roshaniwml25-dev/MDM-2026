@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyBuddy – Focus Timer & Task Planner - (CM25047)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors">
+
+  <!-- Header -->
+  <header class="bg-emerald-600 text-white shadow">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold">📚 StudyBuddy</h1>
+        <p class="text-emerald-100 text-sm">Plan your tasks. Focus. Repeat.</p>
+      </div>
+      <button id="themeToggle" class="rounded-full bg-emerald-500 hover:bg-emerald-400 px-4 py-2 text-sm font-medium" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+
+    <!-- Stats -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="rounded-xl bg-white dark:bg-slate-800 p-5 shadow">
+        <p class="text-sm text-slate-500 dark:text-slate-400">Focus sessions today</p>
+        <p id="statSessions" class="mt-1 text-3xl font-bold text-emerald-500">0</p>
+      </div>
+      <div class="rounded-xl bg-white dark:bg-slate-800 p-5 shadow">
+        <p class="text-sm text-slate-500 dark:text-slate-400">Minutes focused today</p>
+        <p id="statMinutes" class="mt-1 text-3xl font-bold text-sky-500">0</p>
+      </div>
+      <div class="rounded-xl bg-white dark:bg-slate-800 p-5 shadow">
+        <p class="text-sm text-slate-500 dark:text-slate-400">Tasks completed</p>
+        <p id="statTasks" class="mt-1 text-3xl font-bold text-violet-500">0 / 0</p>
+        <div class="mt-2 h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+          <div id="taskBar" class="h-2 rounded-full bg-violet-500 transition-all duration-500" style="width:0%"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Timer -->
+      <section class="rounded-xl bg-white dark:bg-slate-800 p-5 shadow flex flex-col items-center">
+        <h2 class="text-lg font-semibold mb-3 self-start">Focus Timer</h2>
+
+        <div class="flex gap-2 mb-5" role="tablist">
+          <button data-mode="focus" class="mode-btn rounded-full px-3 py-1 text-sm font-medium">Focus</button>
+          <button data-mode="short" class="mode-btn rounded-full px-3 py-1 text-sm font-medium">Short Break</button>
+          <button data-mode="long" class="mode-btn rounded-full px-3 py-1 text-sm font-medium">Long Break</button>
+        </div>
+
+        <div class="relative w-56 h-56">
+          <svg class="w-full h-full -rotate-90" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="90" fill="none" stroke-width="10" class="stroke-slate-200 dark:stroke-slate-700" />
+            <circle id="ring" cx="100" cy="100" r="90" fill="none" stroke-width="10" stroke-linecap="round"
+              class="stroke-emerald-500 transition-all duration-500"
+              stroke-dasharray="565.48" stroke-dashoffset="0" />
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span id="timeText" class="text-5xl font-bold tabular-nums">25:00</span>
+            <span id="modeLabel" class="text-sm text-slate-500 dark:text-slate-400 mt-1">Time to focus</span>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+          <button id="startBtn" class="rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2 font-medium">Start</button>
+          <button id="resetBtn" class="rounded-lg border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 px-6 py-2 font-medium">Reset</button>
+        </div>
+      </section>
+
+      <!-- Tasks -->
+      <section class="lg:col-span-2 rounded-xl bg-white dark:bg-slate-800 p-5 shadow">
+        <h2 class="text-lg font-semibold mb-4">Study Tasks</h2>
+
+        <form id="taskForm" class="grid grid-cols-1 sm:grid-cols-12 gap-3 mb-4">
+          <input id="taskTitle" type="text" required maxlength="60" placeholder="What do you need to study?"
+            class="sm:col-span-12 rounded-lg border border-slate-300 dark:border-slate-600 bg-transparent px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+          <input id="taskSubject" type="text" maxlength="20" placeholder="Subject (e.g. Maths)"
+            class="sm:col-span-4 rounded-lg border border-slate-300 dark:border-slate-600 bg-transparent px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+          <select id="taskPriority"
+            class="sm:col-span-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="High">High</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <input id="taskDue" type="date"
+            class="sm:col-span-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-transparent px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+          <button type="submit" class="sm:col-span-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white py-2 font-medium">Add</button>
+        </form>
+        <p id="taskError" class="hidden text-sm text-rose-500 mb-2"></p>
+
+        <div class="flex flex-wrap gap-2 mb-3" id="filters">
+          <button data-filter="all" class="filter-btn rounded-full px-3 py-1 text-sm">All</button>
+          <button data-filter="active" class="filter-btn rounded-full px-3 py-1 text-sm">Active</button>
+          <button data-filter="done" class="filter-btn rounded-full px-3 py-1 text-sm">Done</button>
+          <button id="clearDone" class="ml-auto text-sm text-rose-500 hover:underline">Clear completed</button>
+        </div>
+
+        <ul id="taskList" class="divide-y divide-slate-200 dark:divide-slate-700"></ul>
+        <p id="emptyMsg" class="hidden text-center text-slate-500 dark:text-slate-400 py-10"></p>
+      </section>
+    </div>
+  </main>
+
+  
+
+  <script>
+    // ---------- Constants & State ----------
+    const STORAGE_KEY = 'studybuddy-data';
+    const THEME_KEY = 'studybuddy-theme';
+    const CIRCUMFERENCE = 2 * Math.PI * 90;
+
+    const MODES = {
+      focus: { minutes: 25, label: 'Time to focus' },
+      short: { minutes: 5,  label: 'Take a short break' },
+      long:  { minutes: 15, label: 'Take a long break' },
+    };
+
+    const PRIORITY_STYLE = {
+      High:   'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300',
+      Medium: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+      Low:    'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
+    };
+
+    const today = () => new Date().toISOString().slice(0, 10);
+
+    let state = loadState();
+    let filter = 'all';
+    let mode = 'focus';
+    let remaining = MODES[mode].minutes * 60;
+    let timerId = null;
+
+    function loadState() {
+      const fresh = { tasks: [], stats: { date: today(), sessions: 0, minutes: 0 } };
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (saved && Array.isArray(saved.tasks) && saved.stats) {
+          if (saved.stats.date !== today()) saved.stats = fresh.stats; // new day, reset stats
+          return saved;
+        }
+      } catch (e) {}
+      return fresh;
+    }
+
+    function saveState() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    // ---------- Helpers ----------
+    const $ = (id) => document.getElementById(id);
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function formatDate(iso) {
+      return new Date(iso + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+    }
+
+    function beep() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        osc.frequency.value = 880;
+        osc.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.4);
+      } catch (e) {}
+    }
+
+    // ---------- Timer ----------
+    function updateTimerUI() {
+      const m = String(Math.floor(remaining / 60)).padStart(2, '0');
+      const s = String(remaining % 60).padStart(2, '0');
+      $('timeText').textContent = `${m}:${s}`;
+      document.title = timerId ? `${m}:${s} – StudyBuddy` : 'StudyBuddy – Focus Timer & Task Planner';
+
+      const total = MODES[mode].minutes * 60;
+      $('ring').style.strokeDashoffset = CIRCUMFERENCE * (1 - remaining / total);
+      $('modeLabel').textContent = MODES[mode].label;
+      $('startBtn').textContent = timerId ? 'Pause' : 'Start';
+
+      document.querySelectorAll('.mode-btn').forEach((btn) => {
+        const active = btn.dataset.mode === mode;
+        btn.className = 'mode-btn rounded-full px-3 py-1 text-sm font-medium ' +
+          (active ? 'bg-emerald-600 text-white'
+                  : 'bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600');
+      });
+    }
+
+    function stopTimer() {
+      clearInterval(timerId);
+      timerId = null;
+    }
+
+    function setMode(newMode) {
+      stopTimer();
+      mode = newMode;
+      remaining = MODES[mode].minutes * 60;
+      updateTimerUI();
+    }
+
+    function tick() {
+      remaining--;
+      if (remaining <= 0) {
+        remaining = 0;
+        stopTimer();
+        beep();
+        if (mode === 'focus') {
+          state.stats.sessions++;
+          state.stats.minutes += MODES.focus.minutes;
+          saveState();
+          renderStats();
+          setMode(state.stats.sessions % 4 === 0 ? 'long' : 'short');
+          alert('Great job! Focus session complete. Take a break.');
+        } else {
+          setMode('focus');
+          alert('Break over. Ready to focus again?');
+        }
+        return;
+      }
+      updateTimerUI();
+    }
+
+    $('startBtn').addEventListener('click', () => {
+      if (timerId) stopTimer();
+      else timerId = setInterval(tick, 1000);
+      updateTimerUI();
+    });
+
+    $('resetBtn').addEventListener('click', () => setMode(mode));
+
+    document.querySelectorAll('.mode-btn').forEach((btn) =>
+      btn.addEventListener('click', () => setMode(btn.dataset.mode)));
+
+    // ---------- Tasks ----------
+    function renderStats() {
+      $('statSessions').textContent = state.stats.sessions;
+      $('statMinutes').textContent = state.stats.minutes;
+      const done = state.tasks.filter((t) => t.done).length;
+      const total = state.tasks.length;
+      $('statTasks').textContent = `${done} / ${total}`;
+      $('taskBar').style.width = (total ? (done / total) * 100 : 0) + '%';
+    }
+
+    function renderFilters() {
+      document.querySelectorAll('.filter-btn').forEach((btn) => {
+        const active = btn.dataset.filter === filter;
+        btn.className = 'filter-btn rounded-full px-3 py-1 text-sm ' +
+          (active ? 'bg-emerald-600 text-white'
+                  : 'bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600');
+      });
+    }
+
+    function renderTasks() {
+      const order = { High: 0, Medium: 1, Low: 2 };
+      const list = state.tasks
+        .filter((t) => filter === 'all' || (filter === 'done' ? t.done : !t.done))
+        .sort((a, b) => a.done - b.done || order[a.priority] - order[b.priority]);
+
+      const empty = $('emptyMsg');
+      empty.classList.toggle('hidden', list.length > 0);
+      empty.textContent = state.tasks.length === 0
+        ? 'No tasks yet. Add your first study task! ✏️'
+        : 'No tasks in this view.';
+
+      $('taskList').innerHTML = list.map((t) => {
+        const overdue = t.due && !t.done && t.due < today();
+        return `
+        <li class="flex items-center gap-3 py-3">
+          <input type="checkbox" data-id="${t.id}" class="toggle-task h-5 w-5 accent-emerald-600 cursor-pointer" ${t.done ? 'checked' : ''} aria-label="Mark done" />
+          <div class="min-w-0 flex-1">
+            <p class="font-medium truncate ${t.done ? 'line-through text-slate-400' : ''}">${escapeHTML(t.title)}</p>
+            <div class="flex flex-wrap items-center gap-2 mt-1 text-xs">
+              <span class="rounded-full px-2 py-0.5 ${PRIORITY_STYLE[t.priority]}">${t.priority}</span>
+              ${t.subject ? `<span class="rounded-full px-2 py-0.5 bg-slate-200 dark:bg-slate-700">${escapeHTML(t.subject)}</span>` : ''}
+              ${t.due ? `<span class="${overdue ? 'text-rose-500 font-semibold' : 'text-slate-500 dark:text-slate-400'}">📅 ${formatDate(t.due)}${overdue ? ' (overdue)' : ''}</span>` : ''}
+            </div>
+          </div>
+          <button data-id="${t.id}" class="delete-task text-rose-500 hover:text-rose-700 text-lg" aria-label="Delete task">🗑️</button>
+        </li>`;
+      }).join('');
+    }
+
+    function renderAll() {
+      renderStats();
+      renderFilters();
+      renderTasks();
+    }
+
+    $('taskForm').addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const title = $('taskTitle').value.trim();
+      const err = $('taskError');
+      if (!title) {
+        err.textContent = 'Please enter a task title.';
+        err.classList.remove('hidden');
+        return;
+      }
+      err.classList.add('hidden');
+      state.tasks.push({
+        id: Date.now(),
+        title,
+        subject: $('taskSubject').value.trim(),
+        priority: $('taskPriority').value,
+        due: $('taskDue').value,
+        done: false,
+      });
+      saveState();
+      ev.target.reset();
+      $('taskPriority').value = 'Medium';
+      renderAll();
+    });
+
+    $('taskList').addEventListener('click', (ev) => {
+      const del = ev.target.closest('.delete-task');
+      if (del) {
+        state.tasks = state.tasks.filter((t) => t.id !== Number(del.dataset.id));
+        saveState();
+        renderAll();
+      }
+    });
+
+    $('taskList').addEventListener('change', (ev) => {
+      if (!ev.target.classList.contains('toggle-task')) return;
+      const task = state.tasks.find((t) => t.id === Number(ev.target.dataset.id));
+      if (task) {
+        task.done = ev.target.checked;
+        saveState();
+        renderAll();
+      }
+    });
+
+    document.querySelectorAll('.filter-btn').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        filter = btn.dataset.filter;
+        renderFilters();
+        renderTasks();
+      }));
+
+    $('clearDone').addEventListener('click', () => {
+      if (state.tasks.some((t) => t.done)) {
+        state.tasks = state.tasks.filter((t) => !t.done);
+        saveState();
+        renderAll();
+      }
+    });
+
+    // ---------- Dark mode ----------
+    function applyTheme(dark) {
+      document.documentElement.classList.toggle('dark', dark);
+      $('themeToggle').textContent = dark ? '☀️ Light' : '🌙 Dark';
+    }
+
+    $('themeToggle').addEventListener('click', () => {
+      const dark = !document.documentElement.classList.contains('dark');
+      applyTheme(dark);
+      try { localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light'); } catch (e) {}
+    });
+
+    // ---------- Init ----------
+    (function init() {
+      let theme = null;
+      try { theme = localStorage.getItem(THEME_KEY); } catch (e) {}
+      applyTheme(theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches);
+      updateTimerUI();
+      renderAll();
+    })();
+  </script>
+</body>
+</html>
